@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+   <title>Soft Security</title>
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="../swiper.min.css">
+
+    <!-- Demo styles -->
+    <style>
+
+    html, body {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+    }
+    body {
+        margin: 0;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: normal;
+        line-height: 1.2em;
+        /* background: #fff; 
+        padding: 0;
+        color:#000;*/
+    }
+    .swiper-container {
+        /*width: 300px;
+        height: 300px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -150px;*/
+    }
+    .swiper-slide {
+        height: 1000px;
+        width: 500px;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+        pointer-events: none;
+        /*background-position: center;
+        background-size: cover;*/
+    }
+
+     .gallery {
+        padding: 1000px 50px;
+     }
+
+     .img, .mirror {
+        width: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top;
+        text-align: center;
+        height: 50%;
+        position: relative;
+        padding-bottom: 2.5%;
+     }
+
+     .loading {
+        width: 100%;
+        height: 100%;
+        background-color: #eee;
+     }
+
+     .mirror {
+        overflow: hidden;
+        position: relative;
+        margin-top: 2.5%;
+        padding-bottom: 0;
+     }
+     .mirror:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient (to bottom, rgba(255,255,255, .7) 0%,rgba(255,255,255, .9) 20%, rgba(255,255,255, 1) 40%);
+     }
+     .vert img {
+        position: static;
+     }
+
+     .mirror img {
+        -o-transform: scaleY(-1);
+        -ms-transform: scaleY(-1);
+        -moz-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        position: static;
+     }
+
+     .overlay {
+        position: fixed;
+        bottom: 1em;
+        z-index: 9999;
+        padding: 1em;
+     }
+
+     .overlay .on, body:not(.mobile ) .overlay:hover .out, body.mobile .overlay.hover .out {
+      display: none;
+    }
+
+    .overlay .on p {
+      background-color: white;
+      padding: .25em .375em;
+      margin: -.25em -.375em;
+    }
+    
+    .overlay .out {
+      font-size: 1.2em;
+    }
+
+    body:not(.mobile) .overlay:hover .on, body.mobile .overlay.hover .on {
+      display: block;
+    }
+
+    #contact {
+      left: 1em;
+    }
+    
+    #mail {
+      right: 1em;
+    }
+    
+    .swiper-wrapper {
+      pointer-events: none;
+    }
+
+    .swiper-pagination {
+      width: 80%;
+      left: 10%;
+      right: 10%;
+      text-align: center;
+      z-index: 999;
+    }
+    
+    .swiper-pagination span {
+      background-color: black;
+      color: white;
+      padding: .25em .2em;
+      line-height: 1.55em;
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    p {
+      margin: 0;
+    }
+
+    img, .out, #mail {
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none;   /* Chrome/Safari/Opera */
+      -khtml-user-select: none;    /* Konqueror */
+      -moz-user-select: none;      /* Firefox */
+      -ms-user-select: none;       /* Internet Explorer/Edge */
+      user-select: none;           /* Non-prefixed version, currently
+                                      not supported by any browser */
+    }
+    
+    @media screen and (max-width: 770px) {
+      
+      .swiper-slide {
+        height: 800px;
+        width:  400px;
+      }
+    
+      .gallery {
+        padding: 80px 40px;
+      }
+      
+    }
+
+    @media screen and (max-width: 480px) {
+      
+      .swiper-slide {
+        height: 500px;
+        width:  250px;
+      }
+    
+      .gallery {
+        padding: 40px 20px;
+      }
+      
+      .swiper-pagination {
+        width: 70%;
+        left: 15%;
+        right: 15%;
+        left: calc(3em - 1em);
+        right: calc(3em - 1em);
+        width: calc(100% - 6em);
+      }
+      
+      #contact {
+        left: 0;
+      }
+    
+      #mail {
+        right: 0;
+      }
+      
+    }
+    
+    @media screen and (min-height: 890px) and (min-width: 1400px) {
+      
+      .swiper-slide {
+        height: 1400px;
+        width:  700px;
+      }
+    
+    }
+
+    </style>
+</head>
+<body class="">
+
+  <header class="header cf" role="banner">
+        <div id="contact" class="overlay">
+      <div class="out">+</div>
+
+    <div class="on">
+        <p>Ceci est une documentation <br/>
+        sur la technique de la taille douce,<br/>
+        que je lie au domaine du design de sécurité. <br/>
+        Si vous avez une question, <br/>
+        n'hésitez pas à m'écrire un mail.<br/><br/>
+        Sofia Papaefthymiou<br/>
+        Eracom, Lausanne, Suisse<br/>
+        </p>
+    </div>
+
+    </div>
+        <div id="mail" class="overlay"><a href="mailto:papaefthymiousophie@gmail.com">@</a>
+    </div>
+</header>
+
+<main class="main cf" role="main">
+  <!-- Slider main container -->
+  <div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+
+        <div class='swiper-slide container vert' data-caption='Prill Viecelli, scans, 2017'>
+        <div class='img' style='margin: 0 14.65000%'><img  class='loading' src='prill_scan/1_prill.jpg'></div>
+        <div class='mirror' style='margin: 0 14.65000%'><img class='loading' src='prill_scan/1_prill.jpg'></div>
+
+        <div class='swiper-slide container vert' data-caption='Prill Viecelli, scans, 2017'>
+        <div class='img' style='margin: 0 14.65000%'><img  class='loading' src='prill_scan/2_prill.jpg'></div>
+        <div class='mirror' style='margin: 0 14.65000%'><img class='loading' src='prill_scan/2_prill.jpg'></div>
+
+    </div>
+
+  </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination" class="overlay swiper-pagination">
+        </div>
+    </div>
+</main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script>window.jQuery || document.write('<script src="./assets/js/jquery-1.11.2.min.js"><\/script>')
+</script>
+<script src="swiper.js">
+</script>
+
+<script type="text/javascript">
+
+
+    
+    /*
+    $(".swiper-slide").each( function() {
+        
+        var $this = $(this),
+            ar    = $this.data("ar"),
+            h     = $this.height();
+        
+        $this.css("width", ar * h);
+        
+    });
+    */
+
+    var $container = $(".swiper-container"),
+        $slides = $container.find(".swiper-slide"),
+        subs = [],
+        imgs = [],
+        $win = $(window);
+    
+    var loadImages = function(index) {
+      if (imgs[index] === undefined || imgs[index] === false) return;
+
+      imgs[index][0].attr("src", imgs[index][0].data("src") ).removeClass("loading");
+      imgs[index][1].attr("src", imgs[index][1].data("src") ).removeClass("loading");
+      imgs[index] = false;
+    };
+    
+    var setY = function() {
+      var wH = $win.height(),
+          cH = $container.height(),
+          //tY = ((wH - cH) + 400) / 4;
+          tY = ((wH-(cH/2))/2) - (wH/8);
+          
+      $container.css('transform','translateY(' + tY + 'px)');
+    };
+    
+    setY();
+    
+    $slides.each( function() {
+      var $this = $(this),
+          cap = $this.data('caption'),
+          $imgs = $(this).find("img");
+          
+      subs.push( (cap) ? '<span>' + cap + "</span>" : '');
+      imgs.push( [$imgs.eq(0), $imgs.eq(1)] );
+    });
+    
+    for (var i = 0; i < 6; ++i) {
+      loadImages(i);
+    } 
+    
+    var oldIndex = 5;
+    
+    var ts = new Swiper (".swiper-container", {
+        // Optional parameters
+        direction: 'horizontal',
+        slidesPerView: "auto",
+        effect: 'coverflow',
+        pagination: '#swiper-pagination',
+        paginationType: 'custom',
+        paginationCustomRender: function (swiper, current, total) {
+          for (var i = oldIndex, l = current + 5; i < l; ++i) {
+            loadImages(i);
+          }
+          oldIndex = current;
+          return subs[current - 1];
+        },
+        paginationHide: false,
+        keyboardControl: true,
+        centeredSlides: true,
+        speed: $(window).width() / 2,
+        mousewheelControl: true,
+        spaceBetween: 0,
+        freeMode: true,
+        freeModeSticky: true,
+        freeModeMomentumRatio: .25,
+        loop: false,
+        //loopedSlides:
+        coverflow: {
+          rotate: 0,
+          stretch: 0,
+          depth: 800,
+          modifier: 1,
+          slideShadows : false
+        },
+        preloadImages: false,
+        updateOnImagesReady: false
+    });
+    
+    $container.on("click", "img", function() {
+      var index = $(this).parent().parent().index();
+          
+      ts.slideTo(index);
+      for (var i = index, l = index + 6; i < l; ++i) {
+        loadImages(i);
+      }
+    });
+    
+    $("#contact").click( function() {
+      $(this).toggleClass("hover");
+    });
+    
+    $win.resize(setY);
+    
+  </script>
+
+</body>
+</html>
